@@ -6,7 +6,7 @@
 /*   By: jiko <jiko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 18:16:31 by jiko              #+#    #+#             */
-/*   Updated: 2023/12/25 22:44:23 by jiko             ###   ########.fr       */
+/*   Updated: 2023/12/24 22:13:16 by jiko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,9 @@ static int	philo_init(t_philo **philo, int ac, char **av)
 
 int	main(int ac, char **av)
 {
+	pthread_t	*thread;
 	t_philo		*philo;
-	t_arg		arg;
 
-	memset(&arg, 0, sizeof(t_arg));
 	if (philo_init(&philo, ac, av) == 1)
 		return (1);
 	

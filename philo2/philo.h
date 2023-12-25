@@ -6,7 +6,7 @@
 /*   By: jiko <jiko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 18:12:49 by jiko              #+#    #+#             */
-/*   Updated: 2023/12/25 22:42:30 by jiko             ###   ########.fr       */
+/*   Updated: 2023/12/24 21:38:56 by jiko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,36 @@
 
 typedef struct s_arg
 {
-	int				philo_num;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				start_time;
-	int				must_think;
-	int				must_eat;
-	int				dead;
-	pthread_mutex_t	*start_mutex;
-	pthread_mutex_t	*rsc_mutex;
+	int	philo_num;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	must_eat;
 }				t_arg;
+
+typedef struct s_mutex
+{
+	int				*fork;
+	pthread_mutex_t	*fork_mutex;
+	int				dead;
+	pthread_mutex_t	dead_mutex;
+}				t_mutex;
+
+typedef struct s_data
+{
+	int				left_fork;
+	int				right_fork;
+	int				start_time;
+	int				end_time;
+	int				eat_count;
+}				t_data;
 
 typedef struct s_philo
 {
-	pthread_t			thread_id;
-	pthread_mutex_t		*left_fork;
-	pthread_mutex_t		*right_fork;
+	int					id;
 	t_arg				*arg;
-	int					end_time;
-	int					philo_id;
-	int					eat_count;
+	t_data				*data;
+	t_mutex				*mutex;
 }				t_philo;
 
 int	ft_atoi(const char *str);
