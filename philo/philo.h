@@ -21,14 +21,16 @@
 
 typedef struct s_arg
 {
-	int				philo_num;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				start_time;
+	long long		philo_num;
+	long long		time_to_die;
+	long long		time_to_eat;
+	long long		time_to_sleep;
+	long long		must_eat;
+	long long		start_time;
 	int				must_think;
-	int				must_eat;
 	int				dead;
+	int				error;
+	int				done;
 	pthread_mutex_t	*start_mutex;
 	pthread_mutex_t	*rsc_mutex;
 }				t_arg;
@@ -39,7 +41,7 @@ typedef struct s_philo
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
 	t_arg				*arg;
-	int					end_time;
+	long long			last_eat_time;
 	int					philo_id;
 	int					eat_count;
 }				t_philo;

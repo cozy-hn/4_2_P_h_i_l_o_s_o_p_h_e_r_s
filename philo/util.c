@@ -31,18 +31,41 @@ int	ft_atoi(const char *str)
 	}
 	if (result > 2147483647 || result < 0)
 		return (-1);
-	return ((int)result);
+	return (result);
 }
 
-int	ft_free(void *ptr1, void *ptr2, void *ptr3, void *ptr4)
+long long arg_time_set(long long *rtn)
 {
-	if (ptr2)
-		free(ptr2);
-	if (ptr3)
-		free(ptr3);
-	if (ptr4)
-		free(ptr4);
-	if (ptr1)
-		free(ptr1);
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	*rtn = ((long long)time.tv_sec * 1000LL) + ((long long)time.tv_usec / 1000LL);
+	return (*rtn);
+}
+
+void join_thread(t_philo **philo, int i)
+{
+	while (--i > 0)
+		pthread_join((*philo)[i].thread_id, NULL);
+}
+
+int free_philo(t_philo **philo, int i, int flag)
+{
+
+	if (flag == 2)
+		free((*philo)[i].right_fork);
+	while (--i > 0)
+	{
+		if (flag >= 1)
+			pthread_mutex_destroy((*philo)[i].right_fork);
+		free((*philo)[i].right_fork);
+	}
+	free(*philo);
+	return (1);
+}	
+
+int ft_error(void)
+{
+	printf("Error\n");
 	return (1);
 }
