@@ -6,7 +6,7 @@
 /*   By: jiko <jiko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 21:22:09 by jiko              #+#    #+#             */
-/*   Updated: 2023/12/24 21:38:35 by jiko             ###   ########.fr       */
+/*   Updated: 2023/12/26 23:09:42 by jiko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,23 @@ int	ft_atoi(const char *str)
 	return (result);
 }
 
-long long arg_time_set(long long *rtn)
+long long	time_set(long long *rtn)
 {
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	*rtn = ((long long)time.tv_sec * 1000LL) + ((long long)time.tv_usec / 1000LL);
+	*rtn = (time.tv_sec * 1000LL) + (time.tv_usec / 1000LL);
 	return (*rtn);
 }
 
-void join_thread(t_philo **philo, int i)
+void	join_thread(t_philo **philo, int i)
 {
 	while (--i > 0)
 		pthread_join((*philo)[i].thread_id, NULL);
 }
 
-int free_philo(t_philo **philo, int i, int flag)
+int	free_philo(t_philo **philo, int i, int flag)
 {
-
 	if (flag == 2)
 		free((*philo)[i].right_fork);
 	while (--i > 0)
@@ -64,7 +63,7 @@ int free_philo(t_philo **philo, int i, int flag)
 	return (1);
 }	
 
-int ft_error(void)
+int	ft_error(void)
 {
 	printf("Error\n");
 	return (1);
