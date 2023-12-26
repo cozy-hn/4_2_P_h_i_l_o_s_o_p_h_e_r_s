@@ -22,7 +22,7 @@ int	state_check(t_philo **philo, t_arg *arg, int i)
 		pthread_mutex_unlock(arg->rsc_mutex);
 		join_thread(philo, arg->philo_num + 1);
 		free_philo(philo, arg->philo_num + 1, 1);
-		return (pthread_mutex_unlock(arg->rsc_mutex) + 1);
+		return (1);
 	}
 	time_set(&now);
 	if (now - (*philo)[i].last_eat_time > arg->time_to_die)
