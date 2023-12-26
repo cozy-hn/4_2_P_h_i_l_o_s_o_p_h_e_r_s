@@ -48,6 +48,8 @@ void	psleep(t_philo *philo)
 			usleep(200);
 		}
 	}
+	else
+		pthread_mutex_unlock(philo->arg->rsc_mutex);
 }
 
 void	eat(t_philo *philo)
