@@ -6,7 +6,7 @@
 /*   By: jiko <jiko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 21:40:11 by jiko              #+#    #+#             */
-/*   Updated: 2023/12/26 23:19:46 by jiko             ###   ########.fr       */
+/*   Updated: 2023/12/27 16:40:21 by jiko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	state_check(t_philo **philo, t_arg *arg, int i)
 {
-	struct timeval	time;
 	long long		now;
 
 	if (arg->error == 1)

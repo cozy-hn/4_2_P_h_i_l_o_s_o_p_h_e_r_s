@@ -6,7 +6,7 @@
 /*   By: jiko <jiko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 18:16:31 by jiko              #+#    #+#             */
-/*   Updated: 2023/12/26 23:20:31 by jiko             ###   ########.fr       */
+/*   Updated: 2023/12/27 16:40:04 by jiko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ static int	philo_one(t_philo *philo)
 
 void	philo_act(t_philo *philo)
 {
-	long long		now;
-
 	pthread_mutex_lock(philo->arg->start_mutex);
 	pthread_mutex_lock(philo->arg->rsc_mutex);
 	if (philo->arg->error == 1)
