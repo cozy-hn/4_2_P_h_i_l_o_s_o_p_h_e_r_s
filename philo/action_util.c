@@ -6,7 +6,7 @@
 /*   By: jiko <jiko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:01:43 by jiko              #+#    #+#             */
-/*   Updated: 2023/12/27 16:43:48 by jiko             ###   ########.fr       */
+/*   Updated: 2023/12/27 17:37:33 by jiko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	psleep(t_philo *philo)
 		time_set(&now);
 		print_message(philo, "is thinking");
 		pthread_mutex_unlock(philo->arg->rsc_mutex);
-		if (philo->arg->must_think < 0 && philo->arg->philo_num % 2 == 1)
+		if (philo->arg->must_think >= 0 && philo->arg->philo_num % 2 == 1)
 		{
 			limit = now + philo->arg->must_think;
-			checker(philo->arg, limit, now, philo->arg->must_think);
-			usleep(200);
+			checker(philo->arg, limit, now, philo->arg->time_to_sleep);
+			usleep(100);
 		}
 	}
 	else
@@ -78,15 +78,14 @@ void	hold_forks(t_philo *philo, int right)
 		pthread_mutex_lock(philo->right_fork);
 		pthread_mutex_lock(philo->arg->rsc_mutex);
 		print_message(philo, "has taken a fork");
-		pthread_mutex_unlock(philo->arg->rsc_mutex);
 	}
 	else
 	{
 		pthread_mutex_lock(philo->left_fork);
 		pthread_mutex_lock(philo->arg->rsc_mutex);
 		print_message(philo, "has taken a fork");
-		pthread_mutex_unlock(philo->arg->rsc_mutex);
 	}
+	pthread_mutex_unlock(philo->arg->rsc_mutex);
 }
 
 void	release_forks(t_philo *philo, int right)
