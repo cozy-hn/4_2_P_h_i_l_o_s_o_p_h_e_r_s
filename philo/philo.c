@@ -6,7 +6,7 @@
 /*   By: jiko <jiko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 18:16:31 by jiko              #+#    #+#             */
-/*   Updated: 2023/12/26 23:16:49 by jiko             ###   ########.fr       */
+/*   Updated: 2023/12/28 17:31:20 by jiko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static int	arg_init(t_arg *arg, int ac, char **av)
 {
 	if (ac != 5 && ac != 6)
 		return (1);
-	arg->philo_num = ft_atoi(av[1]);
-	arg->time_to_die = ft_atoi(av[2]);
-	arg->time_to_eat = ft_atoi(av[3]);
-	arg->time_to_sleep = ft_atoi(av[4]);
+	arg->philo_num = ft_atoll(av[1]);
+	arg->time_to_die = ft_atoll(av[2]);
+	arg->time_to_eat = ft_atoll(av[3]);
+	arg->time_to_sleep = ft_atoll(av[4]);
 	if (ac == 6)
-		arg->must_eat = ft_atoi(av[5]);
+		arg->must_eat = ft_atoll(av[5]);
 	if (arg->philo_num < 1 || arg->time_to_die < 1 || arg->time_to_eat < 1
 		|| arg->time_to_sleep < 1 || (ac == 6 && arg->must_eat < 1))
 		return (1);
@@ -34,6 +34,10 @@ static int	philo_init(t_philo **philo, t_arg *arg)
 	int	i;
 
 	i = 0;
+	*philo = malloc(sizeof(t_philo) * (arg->philo_num + 1));
+	if (!*philo)
+		return (1);
+	memset(*philo, 0, sizeof(t_philo) * (arg->philo_num + 1));
 	while (++i <= arg->philo_num)
 	{
 		(*philo)[i].philo_id = i;
@@ -111,14 +115,8 @@ int	main(int ac, char **av)
 	memset(&arg, 0, sizeof(t_arg));
 	arg.start_mutex = &start_mutex;
 	arg.rsc_mutex = &rsc_mutex;
-	if (arg_init(&arg, ac, av) == 1)
-		return (ft_error());
-	philo = (t_philo *)malloc(sizeof(t_philo) * (arg.philo_num + 1));
-	if (!philo)
-		return (ft_error());
-	memset(philo, 0, sizeof(t_philo) * (arg.philo_num + 1));
-	if (philo_init(&philo, &arg) == 1 || thread_init(&philo, &arg) == 1
-		|| monitoring(&philo, &arg) == 1)
+	if (arg_init(&arg, ac, av) == 1 || philo_init(&philo, &arg) == 1
+		|| thread_init(&philo, &arg) == 1 || monitoring(&philo, &arg) == 1)
 		return (ft_error());
 	join_thread(&philo, arg.philo_num + 1);
 	free_philo(&philo, arg.philo_num + 1, 1);

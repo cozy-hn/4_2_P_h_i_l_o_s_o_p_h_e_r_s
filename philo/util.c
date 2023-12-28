@@ -6,13 +6,13 @@
 /*   By: jiko <jiko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 21:22:09 by jiko              #+#    #+#             */
-/*   Updated: 2023/12/26 23:09:42 by jiko             ###   ########.fr       */
+/*   Updated: 2023/12/28 17:30:50 by jiko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_atoi(const char *str)
+long long	ft_atoll(const char *str)
 {
 	int			i;
 	long long	result;

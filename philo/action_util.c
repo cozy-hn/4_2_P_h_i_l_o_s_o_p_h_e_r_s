@@ -6,7 +6,7 @@
 /*   By: jiko <jiko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:01:43 by jiko              #+#    #+#             */
-/*   Updated: 2023/12/27 17:37:33 by jiko             ###   ########.fr       */
+/*   Updated: 2023/12/28 18:01:24 by jiko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	checker(t_arg *arg, long long limit, long long time, int sleep_time)
 	while ((!arg->dead && !arg->error) && time < limit)
 	{
 		pthread_mutex_unlock(arg->rsc_mutex);
-		usleep(sleep_time / 2 + 1);
+		usleep(sleep_time * 2);
 		time_set(&time);
 		pthread_mutex_lock(arg->rsc_mutex);
 	}
@@ -45,7 +45,7 @@ void	psleep(t_philo *philo)
 		{
 			limit = now + philo->arg->must_think;
 			checker(philo->arg, limit, now, philo->arg->time_to_sleep);
-			usleep(100);
+			usleep(200);
 		}
 	}
 	else
@@ -74,17 +74,11 @@ void	eat(t_philo *philo)
 void	hold_forks(t_philo *philo, int right)
 {
 	if (right == 1)
-	{
 		pthread_mutex_lock(philo->right_fork);
-		pthread_mutex_lock(philo->arg->rsc_mutex);
-		print_message(philo, "has taken a fork");
-	}
 	else
-	{
 		pthread_mutex_lock(philo->left_fork);
-		pthread_mutex_lock(philo->arg->rsc_mutex);
-		print_message(philo, "has taken a fork");
-	}
+	pthread_mutex_lock(philo->arg->rsc_mutex);
+	print_message(philo, "has taken a fork");
 	pthread_mutex_unlock(philo->arg->rsc_mutex);
 }
 

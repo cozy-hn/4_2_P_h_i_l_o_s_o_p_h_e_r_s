@@ -6,7 +6,7 @@
 /*   By: jiko <jiko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 18:12:49 by jiko              #+#    #+#             */
-/*   Updated: 2023/12/26 23:18:48 by jiko             ###   ########.fr       */
+/*   Updated: 2023/12/28 17:31:02 by jiko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_philo
 	int					eat_count;
 }				t_philo;
 
-int			ft_atoi(const char *str);
+long long	ft_atoll(const char *str);
 long long	time_set(long long *rtn);
 void		join_thread(t_philo **philo, int i);
 int			free_philo(t_philo **philo, int i, int flag);
